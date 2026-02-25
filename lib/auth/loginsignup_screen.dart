@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/auth/created.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/components/primary_btn.dart';
 import 'package:flutter_application_1/components/socil_icon.dart';
 import 'package:flutter_application_1/components/text_field.dart';
@@ -17,20 +17,22 @@ class LoginsignupScreen extends StatefulWidget {
 }
 
 class _LoginsignupScreenState extends State<LoginsignupScreen> {
+  bool isLoading = false;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final nameController = TextEditingController();
+
   int selectedIndex = 0;
 
-  @override
-  void initState() {
-    selectedIndex = widget.index;
-    super.initState();
-  }
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final List<Map<String, dynamic>> logindata = [
     {
       'text': "Hii, Welcome Back!",
       'subtext': "Please Provide Us with your\nLogin details",
       'title': 'Log In Now',
-      'button': 'Next',
+      'button': 'Login',
       'action': 'Sign Up',
       'showForgot': true,
     },
@@ -38,11 +40,98 @@ class _LoginsignupScreenState extends State<LoginsignupScreen> {
       'text': "Create an account ",
       'subtext': "Please Provide Us with your\nSign Up details",
       'title': 'Sign Up Now',
-      'button': 'Next',
+      'button': 'Register',
       'action': 'Log In',
       'showForgot': false,
     },
   ];
+
+  @override
+  void initState() {
+    selectedIndex = widget.index;
+    super.initState();
+  }
+
+  Future<void> loginUser() async {
+    try {
+      setState(() => isLoading = true);
+
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      User? user = userCredential.user;
+
+      await user!.reload();
+      user = _auth.currentUser;
+
+      if (!user!.emailVerified) {
+        showMessage("Please verify your email first!");
+        await _auth.signOut();
+        return;
+      }
+
+      if (!mounted) return;
+
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const HomePage()),
+        (route) => false,
+      );
+    } on FirebaseAuthException catch (e) {
+      showMessage(e.message ?? "Login Failed");
+      print("Login Error: ${e.code}");
+    } finally {
+      if (mounted) setState(() => isLoading = false);
+    }
+  }
+
+  Future<void> signupUser() async {
+    try {
+      setState(() => isLoading = true);
+
+      UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim(),
+          );
+
+      await userCredential.user!.updateDisplayName(nameController.text.trim());
+
+      await userCredential.user!.sendEmailVerification();
+
+      showMessage("Verification email sent. Please check your email.");
+
+      await _auth.signOut();
+
+      if (!mounted) return;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const Created()),
+      );
+    } on FirebaseAuthException catch (e) {
+      showMessage(e.message ?? "Signup Failed");
+      print("Signup Error: ${e.code}");
+    } finally {
+      if (mounted) setState(() => isLoading = false);
+    }
+  }
+
+  void showMessage(String message) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +203,12 @@ class _LoginsignupScreenState extends State<LoginsignupScreen> {
                       ),
                     ),
                     if (selectedIndex == 1) ...[
-                      Text('Full Name', style: TextStyle(color: AppColor.lightgrey)),
+                      Text(
+                        'Full Name',
+                        style: TextStyle(color: AppColor.lightgrey),
+                      ),
                       Textfield(
+                        controller: nameController,
                         showImage: false,
                         keyboardType: TextInputType.name,
                       ),
@@ -123,14 +216,19 @@ class _LoginsignupScreenState extends State<LoginsignupScreen> {
                     SizedBox(height: 10),
                     Text('Email', style: TextStyle(color: AppColor.lightgrey)),
                     Textfield(
+                      controller: emailController,
                       showImage: false,
                       keyboardType: TextInputType.emailAddress,
                     ),
                     SizedBox(height: 10),
-                    Text('Password', style: TextStyle(color: AppColor.lightgrey)),
+                    Text(
+                      'Password',
+                      style: TextStyle(color: AppColor.lightgrey),
+                    ),
                     Textfield(
+                      controller: passwordController,
                       showImage: true,
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.visiblePassword,
                     ),
                     if (data['showForgot'])
                       Align(
@@ -155,25 +253,9 @@ class _LoginsignupScreenState extends State<LoginsignupScreen> {
                     SizedBox(height: 20),
                     PrimaryBtn(
                       text: data['button'],
-                      isLoading: false,
-                      onPressed: selectedIndex == 0
-                          ? () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePage(),
-                                ),
-                                (route) => false,
-                              );
-                            }
-                          : () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Created(),
-                                ),
-                              );
-                            },
+                      isLoading: isLoading,
+                      onPressed: selectedIndex == 0 ? loginUser : signupUser,
+
                       bgclr: AppColor.backgColor,
                       isWhiteText: true,
                     ),

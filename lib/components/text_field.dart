@@ -4,13 +4,14 @@ import 'package:flutter_application_1/constants.dart/images.dart';
 
 class Textfield extends StatelessWidget {
   final bool showImage;
-
+final TextEditingController? controller;
   final dynamic keyboardType;
-  const Textfield({super.key, this.showImage = false, this.keyboardType});
+  const Textfield({super.key, this.showImage = false, this.controller, this.keyboardType});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       keyboardType: keyboardType,
       decoration: InputDecoration(
         suffixIcon: showImage

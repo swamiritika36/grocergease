@@ -1,10 +1,17 @@
+plugins {
+
+  id("com.google.gms.google-services")
+
+}
 allprojects {
     repositories {
         google()
         mavenCentral()
     }
 }
-
+ dependencies {
+   
+}
 val newBuildDir: Directory =
     rootProject.layout.buildDirectory
         .dir("../../build")
@@ -17,7 +24,7 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(":app")
-}
+} 
 
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)

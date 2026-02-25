@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "920845460436",
+    "project_id": "grocergease",
+    "storage_bucket": "grocergease.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920845460436:android:c5ab896ac386ab0e31ec41",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920845460436-4j0c6o0caru1follv051ps8a9rlurkn4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_application_1",
+            "certificate_hash": "4a02ecccf81fec25df9066afff8a90e3f5a747cc"
+          }
+        },
+        {
+          "client_id": "920845460436-hu13s919dc0oj8s7q5cbhdaghdsc8sa8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJGvc6EV_Mbx6ai7PVsGd3BxAufqhIxjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920845460436-hu13s919dc0oj8s7q5cbhdaghdsc8sa8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "920845460436-f6u8q62dvhbcj499b0attob630maaebe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterApplication1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/auth/loginsignup_screen.dart';
+
 
 import 'package:flutter_application_1/constants.dart/colors.dart';
 import 'package:flutter_application_1/constants.dart/images.dart';
@@ -14,6 +16,18 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+
+  
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) =>  LoginsignupScreen(index:1,)),
+      (route) => false,
+     
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,11 +127,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             settingsCard([
               settingsTile(Icons.flag_outlined, 'Report a problem', () {}),
               settingsTile(Icons.group_add_outlined, 'Add account', () {}),
-              settingsTile(Icons.logout, 'Log out', () {Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) =>LoginsignupScreen (index: 1,)),
-    );
-  },),
+              settingsTile(Icons.logout, 'Log out', () { logout(context); }
+    
+  ),
             ]),
           ],
         ),
