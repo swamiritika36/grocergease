@@ -1,51 +1,45 @@
 {
   "project_info": {
-    "project_number": "920845460436",
-    "project_id": "grocergease",
-    "storage_bucket": "grocergease.firebasestorage.app"
+    "project_number": "946006960225",
+    "project_id": "grocergease-2b63d",
+    "storage_bucket": "grocergease-2b63d.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:920845460436:android:c5ab896ac386ab0e31ec41",
+        "mobilesdk_app_id": "1:946006960225:android:6d39550e0eb3fb61606220",
         "android_client_info": {
-          "package_name": "com.example.flutter_application_1"
+          "package_name": "com.grocergease.app"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "920845460436-4j0c6o0caru1follv051ps8a9rlurkn4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.flutter_application_1",
-            "certificate_hash": "4a02ecccf81fec25df9066afff8a90e3f5a747cc"
-          }
-        },
-        {
-          "client_id": "920845460436-hu13s919dc0oj8s7q5cbhdaghdsc8sa8.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBJGvc6EV_Mbx6ai7PVsGd3BxAufqhIxjU"
+          "current_key": "AIzaSyD57b4uPxuj9zO_QYQIE3zq36y9WZ0ITGo"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "920845460436-hu13s919dc0oj8s7q5cbhdaghdsc8sa8.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "920845460436-f6u8q62dvhbcj499b0attob630maaebe.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.flutterApplication1"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946006960225:android:91fe7348cb0df970606220",
+        "android_client_info": {
+          "package_name": "grocergease.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD57b4uPxuj9zO_QYQIE3zq36y9WZ0ITGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }

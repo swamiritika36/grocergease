@@ -21,6 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   
     Navigator.pushAndRemoveUntil(
+      // ignore: use_build_context_synchronously
       context,
       MaterialPageRoute(builder: (context) =>  LoginsignupScreen(index:1,)),
       (route) => false,

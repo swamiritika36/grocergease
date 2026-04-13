@@ -7,7 +7,7 @@ import 'package:flutter_application_1/components/text_field.dart';
 import 'package:flutter_application_1/constants.dart/colors.dart';
 import 'package:flutter_application_1/constants.dart/images.dart';
 import 'package:flutter_application_1/home/home_page.dart';
-import 'package:flutter_application_1/password/forget_password.dart';
+// import 'package:flutter_application_1/password/forget_password.dart';
 
 class LoginsignupScreen extends StatefulWidget {
   const LoginsignupScreen({super.key, required this.index});
@@ -81,6 +81,7 @@ class _LoginsignupScreenState extends State<LoginsignupScreen> {
       );
     } on FirebaseAuthException catch (e) {
       showMessage(e.message ?? "Login Failed");
+      // ignore: avoid_print
       print("Login Error: ${e.code}");
     } finally {
       if (mounted) setState(() => isLoading = false);
@@ -113,6 +114,7 @@ class _LoginsignupScreenState extends State<LoginsignupScreen> {
       );
     } on FirebaseAuthException catch (e) {
       showMessage(e.message ?? "Signup Failed");
+      // ignore: avoid_print
       print("Signup Error: ${e.code}");
     } finally {
       if (mounted) setState(() => isLoading = false);
@@ -240,10 +242,16 @@ class _LoginsignupScreenState extends State<LoginsignupScreen> {
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             alignment: Alignment.centerLeft,
                           ),
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => ForgetPassword()),
-                          ),
+                          onPressed: () {
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(builder: (_) => ForgetPassword()),
+                            // );
+                          },
+                          // onPressed: () => Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (_) => ForgetPassword()),
+                          // ),
                           child: Text(
                             'Forgot Password?',
                             style: TextStyle(color: AppColor.backgColor),

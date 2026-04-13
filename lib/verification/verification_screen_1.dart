@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/primary_btn.dart';
 import 'package:flutter_application_1/constants.dart/colors.dart';
 import 'package:flutter_application_1/constants.dart/images.dart';
-import 'package:flutter_application_1/verification/verification_screen_2.dart';
+// import 'package:flutter_application_1/verification/verification_screen_2.dart';
 
 class VerificationScreen1 extends StatefulWidget {
   const VerificationScreen1({super.key});
@@ -109,13 +109,13 @@ class _VerificationScreen1State extends State<VerificationScreen1> {
                     isLoading = false;
                   });
                 });
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        VerificationScreen2(phoneNumber: phoneController.text),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) =>
+                //         VerificationScreen2(phoneNumber: phoneController.text),
+                //   ),
+                // );
               },
               bgclr: AppColor.backgColor,
             ),
